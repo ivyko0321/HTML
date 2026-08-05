@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>劉士銘 - 個人履歷[cite: 1]</title>
+    <style>
+        :root {
+            --primary-blue: #2c7bb6;
+            --light-blue: #e0f2fe;
+            --bg-blue: #f0f8ff;
+            --text-dark: #333333;
+            --text-gray: #666666;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, 'Microsoft JhengHei', sans-serif;
+            background-color: var(--bg-blue);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .resume-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* 頂部標題與個人資訊 */
+        header {
+            background-color: var(--light-blue);
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-bottom: 4px solid var(--primary-blue);
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #ccc; /* 若無照片時的預設背景 */
+        }
+
+        .header-content h1 {
+            margin: 0 0 10px 0;
+            color: var(--primary-blue);
+            font-size: 2.2rem;
+        }
+
+        .header-content h2 {
+            margin: 0 0 15px 0;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            font-weight: normal;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.95rem;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-info a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* 內容區塊排版 */
+        .main-content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-info {
+                justify-content: center;
+            }
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: var(--primary-blue);
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--light-blue);
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* 項目樣式 */
+        .item {
+            margin-bottom: 20px;
+        }
+
+        .item h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1rem;
+            color: #222;
+        }
+
+        .item .subtitle {
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .item p {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .tags {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* 技能區塊 */
+        .skill-group {
+            margin-bottom: 15px;
+        }
+
+        .skill-group h4 {
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .skill-group p {
+            margin: 0;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* 表現亮點 */
+        .highlight-box {
+            background-color: #f8fbff;
+            border-left: 4px solid var(--primary-blue);
+            padding: 15px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="resume-wrapper">
+    <header>
+        <!-- 這裡可以替換成您的真實照片路徑 -->
+        <div class="profile-pic" style="background-image: url('您的照片網址'); background-size: cover; background-position: center;"></div>
+        
+        <div class="header-content">
+            <h1>劉士銘 SHIH-MING, LIU[cite: 1]</h1>
+            <h2>中原大學 工業與系統工程學系 三年級[cite: 1]</h2>
+            <div class="contact-info">
+                <span>📱 0910-552-565[cite: 1]</span>
+                <span>📧 ab864958877@gmail.com[cite: 1]</span>
+                <span>📍 桃園市中壢區新中北路291號105房[cite: 1]</span>
+                <span>🔗 <a href="https://github.com/ivyko0321" target="_blank">GitHub: @ivyko0321</a></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <!-- 左側主欄位：專案與經歷 -->
+        <div class="left-column">
+            
+            <section>
+                <h2 class="section-title">專案經驗 Projects[cite: 1]</h2>
+                
+                <div class="item">
+                    <h3>第四屆微星盃 Yolov9暨品質控制專題[cite: 1]</h3>
+                    <div class="subtitle">專題組入圍[cite: 1]</div>
+                    <p>主導基於 YOLOv9 的影像辨識系統開發，應用於工業零件瑕疵檢測，並入圍校內專題競賽。[cite: 1]</p>
+                    <div class="tags">
+                        <span class="tag">#YOLOv9[cite: 1]</span>
+                        <span class="tag">#DeepLearning[cite: 1]</span>
+                        <span class="tag">#PLC[cite: 1]</span>
+                        <span class="tag">#AI驅動專題[cite: 1]</span>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <h3>系上SK計畫 - 系統模擬優化[cite: 1]</h3>
+                    <div class="subtitle">第二名[cite: 1]</div>
+                    <p>運用 Flexsim 雙模型驗證 與 Minitab 統計分析，針對複雜動線進行效能評估與優化建議。[cite: 1]</p>
+                    <div class="tags">
+                        <span class="tag">#Flexsim[cite: 1]</span>
+                        <span class="tag">#Minitab[cite: 1]</span>
+                        <span class="tag">#系統模擬[cite: 1]</span>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">組織領導與實踐 Experience[cite: 1]</h2>
+                
+                <div class="item">
+                    <h3>中原大學 工業與系統工程學系 網路實驗室/宿舍委員[cite: 1]</h3>
+                    <div class="subtitle">社長 / 樓長[cite: 1]</div>
+                    <ul style="margin-top: 8px; padding-left: 20px; color: var(--text-gray); font-size: 0.95rem;">
+                        <li><strong>網路實驗室社長：</strong>負責前端技術 (HTML/CSS) 之教育訓練，成功帶領 近10 位成員完成 115年人因工程年會與躍馬中原基金會網站。[cite: 1]</li>
+                        <li><strong>宿舍樓長：</strong>管理近百人宿舍之安全與行政事務，具備跨部門溝通與緊急事件應變能力。[cite: 1]</li>
+                        <li><strong>AI 驅動實驗室：</strong>作為創始成員，協助推動系上生成式 AI 應用研究，推廣 AI 工具導入 IE 流程。[cite: 1]</li>
+                        <li><strong>專業行政：</strong>協助系上退休榮譽教授處理複雜之學術文書與行政庶務。[cite: 1]</li>
+                    </ul>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 右側副欄位：表現與技能 -->
+        <div class="right-column">
+            
+            <section>
+                <h2 class="section-title">專業科目表現[cite: 1]</h2>
+                <div class="highlight-box">
+                    <div class="item" style="margin-bottom: 10px;">
+                        <span style="font-size: 1.2rem;">📈</span> <strong>工作研究</strong><br>
+                        實驗班排1 / 工作研究班排4[cite: 1]
+                    </div>
+                    <div class="item" style="margin-bottom: 0;">
+                        <span style="font-size: 1.2rem;">💻</span> <strong>計算機概論 / 思維邏輯程式設計</strong><br>
+                        班排 TOP 4[cite: 1]
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="section-title">專業工具 Skills[cite: 1]</h2>
+                
+                <div class="skill-group">
+                    <h4>開發語言 & AI[cite: 1]</h4>
+                    <p>Python, C/C++, HTML/CSS, Generative AI (Chat GPT/Gemini/Grok)[cite: 1]</p>
+                </div>
+                
+                <div class="skill-group">
+                    <h4>IE 專業軟體[cite: 1]</h4>
+                    <p>Minitab, Flexsim, Automation Studio, AutoCAD, Gurobi[cite: 1]</p>
+                </div>
+
+                <div class="skill-group">
+                    <h4>生產力工具[cite: 1]</h4>
+                    <p>Notion, HackMD, NotebookLM, Canva, MS Office(Word, Powerpoint, Excel)[cite: 1]</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
