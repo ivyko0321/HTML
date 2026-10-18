@@ -1,74 +1,129 @@
 <!DOCTYPE html>
+<!-- 聲明這是一個 HTML5 標準的文件 -->
 <html lang="zh-TW">
 <head>
+    <!-- 設定網頁編碼為 UTF-8，確保繁體中文不會出現亂碼 -->
     <meta charset="UTF-8">
+    <!-- 設定響應式網頁，讓網頁能在不同螢幕尺寸下正常顯示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 網頁標籤頁顯示的標題 -->
     <title>柯妗樺 - 個人履歷</title>
+
     <style>
+        /* =========================================================
+           【教學重點】：CSS 變數（CSS Variables）
+           在全域設定色彩，未來若要改主題色，只需要改這裡即可！
+           ========================================================= */
         :root {
-            --primary-blue: #2c7bb6;
-            --light-blue: #e0f2fe;
-            --bg-blue: #f0f8ff;
-            --text-dark: #333333;
-            --text-gray: #666666;
+            --primary-blue: #2c7bb6; /* 主要品牌藍色 */
+            --light-blue: #e0f2fe;   /* 淺藍色（用於背景與標籤） */
+            --bg-blue: #f0f8ff;      /* 網頁底色 */
+            --text-dark: #333333;    /* 主要文字深灰 */
+            --text-gray: #666666;    /* 次要文字中灰 */
         }
 
+        /* =========================================================
+           【教學重點】：A4 列印專用設定
+           利用 @page 與 @media print 控制網頁轉印成 PDF 時的樣子
+           ========================================================= */
+        @page {
+            size: A4 portrait; /* 指定紙張尺寸為 A4 直向 */
+            margin: 0;           /* 移除預設頁邊距 */
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                padding: 0 !important;
+                -webkit-print-color-adjust: exact; /* 強制列印背景顏色與圖片 */
+                print-color-adjust: exact;
+            }
+            .resume-wrapper {
+                box-shadow: none !important; /* 列印時移除陰影 */
+                border-radius: 0 !important; /* 列印時移除圓角 */
+                margin: 0 !important;
+                width: 210mm !important;     /* 精確定位 A4 寬度 */
+                min-height: 297mm !important;/* 精確定位 A4 高度 */
+            }
+        }
+
+        /* 重設所有元素的內外邊距計算方式，確保邊框與 padding 不會撐大盒子 */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* 全域基本樣式 */
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, 'Microsoft JhengHei', sans-serif;
-            background-color: var(--bg-blue);
+            background-color: var(--bg-blue); /* 使用剛才定義的 CSS 變數 */
             color: var(--text-dark);
             line-height: 1.6;
             margin: 0;
-            padding: 20px;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center; /* 讓履歷紙張在螢幕中央居中 */
         }
 
+        /* =========================================================
+           【教學重點】：履歷 A4 白紙容器設定
+           在畫面上模擬一張實體的 A4 紙張
+           ========================================================= */
         .resume-wrapper {
-            max-width: 900px;
+            width: 210mm;
+            min-height: 297mm;
             margin: 0 auto;
             background: #ffffff;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* 加上陰影增添質感 */
             border-radius: 12px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* 頂部標題與個人資訊 */
+        /* =========================================================
+           【教學重點】：頂部個人資訊區（Flexbox 運用）
+           ========================================================= */
         header {
             background-color: var(--light-blue);
-            padding: 40px;
-            display: flex;
-            align-items: center;
-            gap: 30px;
+            padding: 20px 40px;
+            display: flex;          /* 開啟 Flex 佈局 */
+            align-items: center;    /* 垂直居中對齊 */
+            gap: 30px;              /* 大頭照與文字之間的間距 */
             border-bottom: 4px solid var(--primary-blue);
         }
 
+        /* 大頭照圓形卡片 */
         .profile-pic {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;    /* 50% 圓角即可將方形轉為正圓 */
             object-fit: cover;
             border: 4px solid #ffffff;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            background-color: #ccc; /* 若無照片時的預設背景 */
+            background-color: #ccc;
+            flex-shrink: 0;        /* 防止圖片被擠壓變形 */
         }
 
         .header-content h1 {
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             color: var(--primary-blue);
-            font-size: 2.2rem;
+            font-size: 2rem;
         }
 
         .header-content h2 {
-            margin: 0 0 15px 0;
-            font-size: 1.2rem;
+            margin: 0 0 12px 0;
+            font-size: 1.1rem;
             color: var(--text-gray);
             font-weight: normal;
         }
 
+        /* 聯絡資訊並排 */
         .contact-info {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            font-size: 0.95rem;
+            flex-wrap: wrap;        /* 寬度不夠時自動折行 */
+            gap: 12px;
+            font-size: 0.9rem;
         }
 
         .contact-info span {
@@ -79,128 +134,170 @@
         
         .contact-info a {
             color: var(--primary-blue);
-            text-decoration: none;
+            text-decoration: none;  /* 移除預設底線 */
             font-weight: bold;
         }
 
         .contact-info a:hover {
-            text-decoration: underline;
+            text-decoration: underline; /* 滑鼠懸停時顯示底線 */
         }
 
-        /* 內容區塊排版 */
+        /* =========================================================
+           【教學重點】：核心排版（CSS Grid 左右雙欄位）
+           ========================================================= */
         .main-content {
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
+            padding: 20px 40px;
+            display: grid;                            /* 開啟 Grid 網格系統 */
+            grid-template-columns: 1.65fr 1.35fr;     /* 設定左右欄位寬度比例為 1.65 : 1.35 */
+            gap: 35px;                                /* 左右欄之間的間距 */
+            flex-grow: 1;                             /* 自動填滿剩餘高度 */
         }
 
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .contact-info {
-                justify-content: center;
-            }
-        }
-
+        /* 區塊與標題樣式 */
         section {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .section-title {
             color: var(--primary-blue);
-            font-size: 1.4rem;
-            border-bottom: 2px solid var(--light-blue);
-            padding-bottom: 8px;
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--light-blue); /* 標題底線 */
+            padding-bottom: 6px;
             margin-top: 0;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
 
-        /* 項目樣式 */
+        /* 單個經歷/專案項目卡片 */
         .item {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .item h3 {
-            margin: 0 0 5px 0;
-            font-size: 1.1rem;
+            margin: 0 0 4px 0;
+            font-size: 1.05rem;
             color: #222;
         }
 
         .item .subtitle {
             font-weight: bold;
             color: var(--primary-blue);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+        }
+
+        .item h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.8rem;
+            color: #333;
         }
 
         .item p {
-            margin: 0;
+            margin: 0 0 6px 0;
             color: var(--text-gray);
-            font-size: 0.95rem;
+            font-size: 0.78rem;
         }
 
+        /* 連結區塊 */
+        .project-links {
+            font-size: 0.8rem;
+            margin-top: 4px;
+        }
+
+        .project-links a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* 標籤貼紙樣式（例如 #計算機概論） */
         .tags {
             margin-top: 8px;
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
 
         .tag {
             background-color: var(--light-blue);
             color: var(--primary-blue);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
+            padding: 2px 6px;
+            border-radius: 12px;   /* 圓角小標籤 */
+            font-size: 0.7rem;
             font-weight: bold;
         }
 
-        /* 技能區塊 */
+        /* =========================================================
+           【教學重點】：右側專業技能（小 Grid 兩欄）
+           ========================================================= */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 平分兩欄（1:1） */
+            gap: 10px;
+        }
+
         .skill-group {
-            margin-bottom: 15px;
+            background-color: #f8fbff;
+            border: 1px solid var(--light-blue);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 0;
         }
 
         .skill-group h4 {
-            margin: 0 0 5px 0;
-            font-size: 1rem;
-            color: var(--text-dark);
+            margin: 0 0 7px 0;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+            line-height: 1.4;
         }
 
-        .skill-group p {
+        .skill-group ul {
             margin: 0;
+            padding-left: 16px;
             color: var(--text-gray);
-            font-size: 0.9rem;
+            font-size: 0.75rem;
+            line-height: 1.5;
         }
 
-        /* 表現亮點 */
+        .skill-group li {
+            margin-bottom: 2px;
+        }
+
+        /* 高亮卡片（用於學業表現） */
         .highlight-box {
             background-color: #f8fbff;
-            border-left: 4px solid var(--primary-blue);
-            padding: 15px;
+            border-left: 4px solid var(--primary-blue); /* 左側粗色條強化重點 */
+            padding: 10px 12px;
             border-radius: 0 8px 8px 0;
             margin-bottom: 15px;
+        }
+
+        .highlight-box ul {
+            margin: 4px 0 0 0;
+            padding-left: 18px;
+            color: var(--text-gray);
+            font-size: 0.8rem;
         }
 
     </style>
 </head>
 <body>
 
+<!-- 履歷主要 A4 容器 -->
 <div class="resume-wrapper">
+
+    <!-- 頂部資訊：個人大頭照與基本聯絡方式 -->
     <header>
-        <!-- 這裡可以替換成您的真實照片路徑 -->
-        <div class="profile-pic" style="background-image: url('images/my.jpg'); background-size: cover; background-position: center;"></div>
+        <!-- 
+            【教學小提醒】：
+            這裡利用 background-image 帶入圖片，也可以改用標準的 <img src="my.jpg" class="profile-pic" alt="大頭照">
+        -->
+        <div class="profile-pic" style="background-image: url('my.jpg'); background-size: cover; background-position: center;"></div>
         
         <div class="header-content">
             <h1>柯妗樺 CHIN-HUA, KO</h1>
             <h2>中原大學 工業與系統工程學系 二年級</h2>
             <div class="contact-info">
-                <span>📱 0903-180-677</span>
+                <span>📱 0912-345-678</span>
                 <span>📧 ivyko0321@gmail.com</span>
                 <span>📍 桃園市中壢區</span>
                 <span>🔗 <a href="https://github.com/ivyko0321" target="_blank">GitHub: @ivyko0321</a></span>
@@ -208,87 +305,136 @@
         </div>
     </header>
 
+    <!-- 主體內容：分為左右兩欄 -->
     <div class="main-content">
-        <!-- 左側主欄位：專案與經歷 -->
+        
+        <!-- 左側欄位：重點放「專案經驗 Projects」 -->
         <div class="left-column">
             
             <section>
-                <h2 class="section-title">專案經驗 Projects[cite: 1]</h2>
+                <h2 class="section-title">專案經驗 Projects</h2>
                 
+                <!-- 專案 1 -->
                 <div class="item">
-                    <h3>第四屆微星盃 Yolov9暨品質控制專題[cite: 1]</h3>
-                    <div class="subtitle">專題組入圍[cite: 1]</div>
-                    <p>主導基於 YOLOv9 的影像辨識系統開發，應用於工業零件瑕疵檢測，並入圍校內專題競賽。[cite: 1]</p>
+                    <h3>計算機概論學科競賽</h3>
+                    <div class="subtitle">優勝 🏆</div>
+                    <h4>專題主題：智慧傘架</h4>
+                    <p>透過 Webduino 程式及感應元件結合 JavaScript 抓取當地天氣的 JSON 格式資料，實作出防呆機制與提醒帶傘的偵測功能。</p>
+                    <div class="project-links">
+                        🔗 專案展示：
+                        <a href="https://canva.link/qk26hfjqpovvh3s" target="_blank">Canva 簡報</a> | 
+                        <a href="https://youtu.be/jn_sjPTtH80" target="_blank">YouTube 展示影片</a>
+                    </div>
                     <div class="tags">
-                        <span class="tag">#YOLOv9[cite: 1]</span>
-                        <span class="tag">#DeepLearning[cite: 1]</span>
-                        <span class="tag">#PLC[cite: 1]</span>
-                        <span class="tag">#AI驅動專題[cite: 1]</span>
+                        <span class="tag">#計算機概論</span>
+                        <span class="tag">#Webduino</span>
+                        <span class="tag">#JavaScript</span>
+                        <span class="tag">#防呆機制</span>
                     </div>
                 </div>
 
+                <!-- 專案 2 -->
                 <div class="item">
-                    <h3>系上SK計畫 - 系統模擬優化[cite: 1]</h3>
-                    <div class="subtitle">第二名[cite: 1]</div>
-                    <p>運用 Flexsim 雙模型驗證 與 Minitab 統計分析，針對複雜動線進行效能評估與優化建議。[cite: 1]</p>
+                    <h3>AI 驅動專題</h3>
+                    <div class="subtitle">入圍國科會計畫 🚀</div>
+                    <h4>專題主題：AI 人型機器人應用於長照的人機協作賦能</h4>
+                    <p>運用人型機器人協助照護對象翻身，有效降低照護工作者上斜方肌及豎脊肌之職業傷害，藉由 EMG 肌電測量進行實驗。</p>
                     <div class="tags">
-                        <span class="tag">#Flexsim[cite: 1]</span>
-                        <span class="tag">#Minitab[cite: 1]</span>
-                        <span class="tag">#系統模擬[cite: 1]</span>
+                        <span class="tag">#人因工程</span>
+                        <span class="tag">#人型機器人</span>
+                        <span class="tag">#長照</span>
+                        <span class="tag">#EMG肌電分析</span>
                     </div>
                 </div>
-            </section>
 
-            <section>
-                <h2 class="section-title">組織領導與實踐 Experience[cite: 1]</h2>
-                
+                <!-- 專案 3 -->
                 <div class="item">
-                    <h3>中原大學 工業與系統工程學系 網路實驗室/宿舍委員[cite: 1]</h3>
-                    <div class="subtitle">社長 / 樓長[cite: 1]</div>
-                    <ul style="margin-top: 8px; padding-left: 20px; color: var(--text-gray); font-size: 0.95rem;">
-                        <li><strong>網路實驗室社長：</strong>負責前端技術 (HTML/CSS) 之教育訓練，成功帶領 近10 位成員完成 115年人因工程年會與躍馬中原基金會網站。[cite: 1]</li>
-                        <li><strong>宿舍樓長：</strong>管理近百人宿舍之安全與行政事務，具備跨部門溝通與緊急事件應變能力。[cite: 1]</li>
-                        <li><strong>AI 驅動實驗室：</strong>作為創始成員，協助推動系上生成式 AI 應用研究，推廣 AI 工具導入 IE 流程。[cite: 1]</li>
-                        <li><strong>專業行政：</strong>協助系上退休榮譽教授處理複雜之學術文書與行政庶務。[cite: 1]</li>
-                    </ul>
+                    <h3>CYCU*HGU Global Rotation Program Summer Camp 2026</h3>
+                    <h4>專題主題：Urban civil complaint data analysis</h4>
+                    <p>和韓國學生一起討論、解決政府回報系統的問題，並建立一個新網頁，簡化報修步驟及顯示處理進度。</p>
+                    <div class="project-links">
+                        🔗 專案展示：
+                        <a href="https://civic-pin-nine.vercel.app/" target="_blank">市民網頁</a> | 
+                        <a href="https://youtu.be/fL2DC1aLAU4?si=U4cDvaOMXZgpIM3v" target="_blank">市民網頁 YouTube 展示影片</a> |
+                        <a href="https://civic-pin-nine.vercel.app/admin" target="_blank">政府網頁</a> | 
+                        <a href="https://youtu.be/hf1kPvLgR4g?si=LuyqqWJRFjdzyxB-" target="_blank">政府網頁 YouTube 展示影片</a>
+                    </div>
+                    <div class="tags">
+                        <span class="tag">#跨國學習</span>
+                        <span class="tag">#服務品質管理</span>
+                        <span class="tag">#問題發想</span>
+                        <span class="tag">#AI應用</span>
+                    </div>
                 </div>
             </section>
 
         </div>
 
-        <!-- 右側副欄位：表現與技能 -->
+        <!-- 右側欄位：放「組織領導」、「學業表現」與「專業工具」 -->
         <div class="right-column">
             
+            <!-- 社團領導 -->
             <section>
-                <h2 class="section-title">專業科目表現[cite: 1]</h2>
+                <h2 class="section-title">組織領導 Leadership</h2>
+                
+                <div class="item">
+                    <h3>中原大學 工業與系統工程學系</h3>
+                    <div class="subtitle">網路實驗室 社長 / 118級乙班 副班代</div>
+                    <ul style="margin-top: 6px; padding-left: 18px; color: var(--text-gray); font-size: 0.78rem; line-height: 1.5;">
+                        <li><strong>網路實驗室社長：</strong>負責網頁前端技術（HTML/CSS）之教學，曾參與團隊完成<a href="https://ab864958877-ming.github.io/YMCY.FD.web/about.html" target="_blank">躍馬中原基金會官網</a>設計；並維護系上電腦教室設備與軟硬體簡易維修。</li>
+                        <li><strong>副班代：</strong>擔任教授與學生間之溝通橋樑，協助處理班級共同事務。</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- 成績表現卡片 -->
+            <section>
+                <h2 class="section-title">學業表現 Academic</h2>
                 <div class="highlight-box">
                     <div class="item" style="margin-bottom: 10px;">
-                        <span style="font-size: 1.2rem;">📈</span> <strong>工作研究</strong><br>
-                        實驗班排1 / 工作研究班排4[cite: 1]
+                        <span style="font-size: 0.9rem;">📈</span> <strong>學期總成績</strong><br>
+                        <span style="color: var(--primary-blue); font-weight: bold; font-size: 0.85rem;">班排 ? / 系排 ?</span>
                     </div>
                     <div class="item" style="margin-bottom: 0;">
-                        <span style="font-size: 1.2rem;">💻</span> <strong>計算機概論 / 思維邏輯程式設計</strong><br>
-                        班排 TOP 4[cite: 1]
+                        <span style="font-size: 0.9rem;">💻</span> <strong>專業科目成績</strong><br>
+                        <ul>
+                            <li>微積分：<strong>班排 ?</strong></li>
+                            <li>運算思維與程式設計：<strong>班排 ?</strong></li>
+                            <li>計算機概論：<strong>班排 ?</strong></li>
+                        </ul>
                     </div>
                 </div>
             </section>
 
+            <!-- 技能工具（兩欄式卡片） -->
             <section>
-                <h2 class="section-title">專業工具 Skills[cite: 1]</h2>
-                
-                <div class="skill-group">
-                    <h4>開發語言 & AI[cite: 1]</h4>
-                    <p>Python, C/C++, HTML/CSS, Generative AI (Chat GPT/Gemini/Grok)[cite: 1]</p>
-                </div>
-                
-                <div class="skill-group">
-                    <h4>IE 專業軟體[cite: 1]</h4>
-                    <p>Minitab, Flexsim, Automation Studio, AutoCAD, Gurobi[cite: 1]</p>
-                </div>
+                <h2 class="section-title">專業工具 Skills</h2>
+                <div class="skills-grid">
+                    
+                    <!-- 開發工具類 -->
+                    <div class="skill-group">
+                        <h4>💻 開發語言 & 開發工具</h4>
+                        <ul>
+                            <li>Python</li>
+                            <li>C</li>
+                            <li>HTML / CSS</li>
+                            <li>Flutter / Dart</li>
+                            <li>Git / GitHub</li>
+                        </ul>
+                    </div>
 
-                <div class="skill-group">
-                    <h4>生產力工具[cite: 1]</h4>
-                    <p>Notion, HackMD, NotebookLM, Canva, MS Office(Word, Powerpoint, Excel)[cite: 1]</p>
+                    <!-- AI 工具類 -->
+                    <div class="skill-group">
+                        <h4>🤖 生成式 AI</h4>
+                        <ul>
+                            <li>ChatGPT</li>
+                            <li>Gemini</li>
+                            <li>NotebookLM</li>
+                            <li>stitch</li>
+                            <li>bolt</li>
+                        </ul>
+                    </div>
+
                 </div>
             </section>
 
